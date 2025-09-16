@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>میرا سوشل پروفائل</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Golden particles */
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, #ffd700, #ff8c00, transparent);
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: float 8s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      30% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(135deg, #b8860b, #7a5c00);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      max-width: 400px;
+      text-align: center;
+      color: #fff;
+      animation: fadeIn 1.5s ease-out;
+      transition: transform 0.4s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 24px;
+      background: linear-gradient(45deg, #ffd700, #ff8c00, #ff4500, #ffd700);
+      background-size: 300% 300%;
+      filter: blur(12px);
+      z-index: -1;
+      animation: glowing 6s infinite linear;
+    }
+
+    @keyframes glowing {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 15px;
+      border: 4px solid #fff;
+      animation: avatarPulse 3s infinite ease-in-out;
+    }
+
+    @keyframes avatarPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 🔥 Name with 3D popping + black glow + wave shine */
+    h2 {
+      margin: 10px 0 5px;
+      font-size: 28px;
+      color: #fff;
+      position: relative;
+      display: inline-block;
+      animation: wave 3s infinite ease-in-out;
+      text-shadow: 
+        2px 2px 3px #000,
+        4px 4px 6px #111,
+        6px 6px 8px #222,
+        0 0 12px #000;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: perspective(500px) translateZ(20px) rotateX(0deg); }
+      50% { transform: perspective(500px) translateZ(30px) rotateX(5deg); }
+    }
+
+    /* Shine reflection effect */
+    h2::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 150%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+      animation: shine 4s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -150%; }
+      50% { left: 100%; }
+      100% { left: 150%; }
+    }
+
+    /* ✨ Bio glowing effect */
+    p.bio {
+      margin: 0 0 20px;
+      font-size: 14px;
+      color: #f5f5dc;
+      animation: bioGlow 3s infinite alternate;
+    }
+
+    @keyframes bioGlow {
+      0% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffa500; }
+      100% { text-shadow: 0 0 15px #ffd700, 0 0 25px #ff8c00; }
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .links a {
+      display: block;
+      padding: 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+      transition: 0.4s ease;
+      transform: translateY(0);
+      animation: linkGlow 3s infinite alternate;
+    }
+
+    @keyframes linkGlow {
+      0% { box-shadow: 0 0 8px rgba(255,215,0,0.5); }
+      100% { box-shadow: 0 0 20px rgba(255,215,0,0.9); }
+    }
+
+    .links a:hover {
+      transform: translateY(-5px) scale(1.05);
+      opacity: 0.9;
+      box-shadow: 0 0 15px #ffd700, 0 0 25px #ffa500;
+    }
+
+    .tiktok { background: #000; }
+    .instagram { background: linear-gradient(45deg, #feda75, #d62976, #962fbf, #4f5bd5); }
+    .facebook { background: #1877f2; }
+
+    b {
+      animation: textPulse 2.5s infinite alternate;
+    }
+
+    @keyframes textPulse {
+      0% { text-shadow: 0 0 8px #ffd700; }
+      100% { text-shadow: 0 0 18px #ff8c00; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Golden particles -->
+  <script>
+    for (let i = 0; i < 30; i++) {
+      let particle = document.createElement("div");
+      particle.classList.add("particle");
+      particle.style.left = Math.random() * 100 + "vw";
+      particle.style.animationDuration = 5 + Math.random() * 10 + "s";
+      particle.style.opacity = Math.random();
+      document.body.appendChild(particle);
+    }
+  </script>
+
+  <!-- 🎶 Background Music -->
+  <audio autoplay loop hidden>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    <div class="avatar">
+      <img src="https://i.postimg.cc/zXcbTkJC/1757827301025.jpg" alt="Profile Photo">
+    </div>
+    <h2>UZAIR SATTAR MALIK</h2>
+    <p class="bio"><b>Photographer <br> Video editor <br> Web developer</b><br><b>I live in Shikarpur Sindh Pakistan</b></p>
+
+    <div class="links">
+      <a href="https://www.tiktok.com/@u_sukuna" class="tiktok" target="_blank">@u_sukuna</a>
+      <a href="https://www.instagram.com/u_sukuna_insta" class="instagram" target="_blank">@uzairsattarmalik</a>
+      <a href="https://www.facebook.com/share/17FcAKAa4K/" class="facebook" target="_blank">uzair sattar malik</a>
+    </div>
+    <b>Uzair Malik</b><br>
+    <b>Follow the social account</b>
+  </div>
+</body>
+</html>
